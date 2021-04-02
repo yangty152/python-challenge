@@ -55,7 +55,7 @@ with open(file) as csvfile:
     print(f"Total Votes: {TotalVotesCast}")
     print("-------------------------------")
     for i in range(len(VoteCount)):
-        print(f"{UniqueCandidate[i]}: {VotePercent[i]} ({VoteCount[i]})")
+        print(f'{UniqueCandidate[i]}: {100*VotePercent[i]}% ({VoteCount[i]})')
         i+=1
     print("-------------------------------")
     print(f"Winner: {Winner}")
