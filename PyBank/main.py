@@ -6,7 +6,6 @@ file = os.path.join('..','PyBank','Resources','budget_data.csv')
 print(file)
 with open(file) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
-    #print(csvreader)
     Month = []
     ProfitLosses =[]
     totalProfitLosses = 0
@@ -23,7 +22,7 @@ with open(file) as csvfile:
         Month.append(row[0])
         ProfitLosses.append(row[1])
 
-    for i in range(len(Month)-1):
+    for i in range(len(Month)):
         if int(ProfitLosses[i]) > GreatestIncrease:
             GreatestIncrease = int(ProfitLosses[i])
             GreatestIncreaseMonth = Month[i]
