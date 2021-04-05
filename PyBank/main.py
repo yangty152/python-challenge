@@ -9,14 +9,16 @@ with open(file) as csvfile:
     csv_header = next(csvreader)
     
     #Declare and initiate variables
-    Month = []
+    Month =[]
     ProfitLosses =[]
+    ProfitChange =[]
     totalProfitLosses = 0
     GreatestIncrease = 0
     GreatestDecrease = 0
     GreatestIncreaseMonth =""
     GreatestDecreaseMonth =""
     AverageChange = 0
+    profitLossesChangeTotal = 0
     
     #Loop through all rows in the file, and calcuate total Profit/Losses
     #Assign values to the list of month and profitlosses
@@ -24,20 +26,25 @@ with open(file) as csvfile:
         totalProfitLosses += int(row[1])
         Month.append(row[0])
         ProfitLosses.append(row[1])
-    
+    for i in (range(len(ProfitLosses)-1)):
+        ProfitChange.append(int(ProfitLosses[i+1])-int(ProfitLosses[i]))
+        i+=1
+    for i in (range(len(ProfitChange))):
+        profitLossesChangeTotal += ProfitChange[i]
+        i+=1
     #Calculate averate changes - change between end period profit/losses and beginning profit/losses, and then divide by total periods
-    AverageChange = (int(ProfitLosses[len(ProfitLosses)-1])-int(ProfitLosses[0]))/len(ProfitLosses)
+    AverageChange = profitLossesChangeTotal/len(ProfitChange)
     AverageChange = "{:.2f}".format(AverageChange)
     #Compare and find the greatest increase and greatest decrease value
-    for i in range(len(Month)):
-        if int(ProfitLosses[i]) > GreatestIncrease:
-            GreatestIncrease = int(ProfitLosses[i])
-            GreatestIncreaseMonth = Month[i]
+    for i in range(len(ProfitChange)):
+        if int(ProfitChange[i]) > GreatestIncrease:
+            GreatestIncrease = int(ProfitChange[i])
+            GreatestIncreaseMonth = Month[i+1]
         else:
             GreatestIncrease = GreatestIncrease
-        if int(ProfitLosses[i]) < GreatestDecrease:
-            GreatestDecrease = int(ProfitLosses[i])
-            GreatestDecreaseMonth = Month[i]
+        if int(ProfitChange[i]) < GreatestDecrease:
+            GreatestDecrease = int(ProfitChange[i])
+            GreatestDecreaseMonth = Month[i+1]
         else:
             GreatestDecrease = GreatestDecrease
 
