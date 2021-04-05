@@ -7,6 +7,8 @@ file = os.path.join('..','PyPoll','Resources','election_data.csv')
 with open(file) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
     csv_header = next(csvreader)
+    
+    #Define variables
     VoterID = []
     Candidate = []
     UniqueCandidate = []
