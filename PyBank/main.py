@@ -17,8 +17,8 @@ with open(file) as csvfile:
     GreatestDecrease = 0
     GreatestIncreaseMonth =""
     GreatestDecreaseMonth =""
-    AverageChange = 0
     profitLossesChangeTotal = 0
+    AverageChange = 0
     
     #Loop through all rows in the file, and calcuate total Profit/Losses
     #Assign values to the list of month and profitlosses
@@ -26,15 +26,23 @@ with open(file) as csvfile:
         totalProfitLosses += int(row[1])
         Month.append(row[0])
         ProfitLosses.append(row[1])
+    
+    #Calculate the monthly profit/Losses changes and assign the value to a list
     for i in (range(len(ProfitLosses)-1)):
         ProfitChange.append(int(ProfitLosses[i+1])-int(ProfitLosses[i]))
         i+=1
+
+    #Calculate the total of the profit and losses change.
     for i in (range(len(ProfitChange))):
         profitLossesChangeTotal += ProfitChange[i]
         i+=1
-    #Calculate averate changes - change between end period profit/losses and beginning profit/losses, and then divide by total periods
+    
+    #Calculate average changes - change between end period profit/losses and beginning profit/losses, and then divide by total periods
     AverageChange = profitLossesChangeTotal/len(ProfitChange)
+    
+    #Format the average change to a percentage with 2 decimal
     AverageChange = "{:.2f}".format(AverageChange)
+    
     #Compare and find the greatest increase and greatest decrease value
     for i in range(len(ProfitChange)):
         if int(ProfitChange[i]) > GreatestIncrease:
